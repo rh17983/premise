@@ -21,8 +21,9 @@ config = configparser.RawConfigParser()
 rest_mode = False
 config.optionxform = str
 
-if os.path.isfile('gg.txt'):
-    config.read('gg.txt')
+if os.path.isfile('config'):
+    config.read('config')
+    print("####")
 else:
     print("@@@@")
 
