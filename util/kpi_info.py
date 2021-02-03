@@ -108,7 +108,6 @@ def initialize(kpi_strings):
         localizer_config.save_cache(kpi_list, 'kpi', 'kpi')
         localizer_config.save_cache(__rsc_cnt, 'kpi', 'rsc')
 
-        exit()
         return True
 
 
