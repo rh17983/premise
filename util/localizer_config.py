@@ -22,6 +22,8 @@ rest_mode = False
 config.optionxform = str
 if os.path.isfile('config'):
     config.read('config')
+else:
+    print("@@@@")
 
 
 def load(filename):
@@ -157,8 +159,7 @@ def get_dst_path(target):
         The path of the target folder.
     """
     global config
-    if not config.has_section('folder') or \
-            not config.has_option('folder', 'dst'):
+    if not config.has_section('folder') or not config.has_option('folder', 'dst'):
         localizer_log.error("folder/dst option is missing!")
     dst = config.get('folder', 'dst')
 
