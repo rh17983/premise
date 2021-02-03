@@ -97,6 +97,7 @@ def initialize(kpi_strings):
         kpi_list = []
         __rsc_cnt = {}
         for i, kpi in enumerate(kpis):
+            print(i, kpi)
             kpi_obj = KPI(i, *kpi) if kpi else None
             kpi_list.append(kpi_obj)
             rsc = kpi_obj.resource
@@ -107,7 +108,6 @@ def initialize(kpi_strings):
         localizer_config.save_cache(kpi_list, 'kpi', 'kpi')
         localizer_config.save_cache(__rsc_cnt, 'kpi', 'rsc')
 
-        print(kpi_list)
         exit()
         return True
 
