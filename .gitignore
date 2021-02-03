@@ -4,7 +4,7 @@
 .DS_Store
 .venv
 caches/
-util/config
+config
 tags
 intermediate/
 original_data/

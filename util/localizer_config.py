@@ -20,8 +20,9 @@ from weka.core.dataset import Instances
 config = configparser.RawConfigParser()
 rest_mode = False
 config.optionxform = str
-if os.path.isfile('config'):
-    config.read('config')
+
+if os.path.isfile('gg.txt'):
+    config.read('gg.txt')
 else:
     print("@@@@")
 
