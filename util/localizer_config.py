@@ -107,11 +107,9 @@ def get_meta_path(target):
         The path of the target file.
     """
     global config
-    if not config.has_section('folder') or \
-            not config.has_option('folder', 'meta'):
+    if not config.has_section('folder') or not config.has_option('folder', 'meta'):
         localizer_log.error("folder/meta option is missing!")
-    if not config.has_section('meta') or \
-            not config.has_option('meta', target):
+    if not config.has_section('meta') or not config.has_option('meta', target):
         localizer_log.error("{option} option is missing!"
                             .format(option='meta/' + str(target)))
     meta_folder = config.get('folder', 'meta')

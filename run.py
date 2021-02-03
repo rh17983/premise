@@ -38,6 +38,7 @@ def run():
 
     # Load KPI
     kpi_meta = localizer_config.get_meta_path('kpi')
+    input(kpi_meta)
     with open(kpi_meta) as f:
         localizer_log.msg("Reading kpi file...")
         kpi_info.initialize(f.read())
