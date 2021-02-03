@@ -156,7 +156,7 @@ def get_kpi_by_tag(tag):
     """
     global kpi_list
     idx = get_index(tag)
-    if idx is not -1:
+    if idx != -1:
         return kpi_list[idx]
     else:
         return None
