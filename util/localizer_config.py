@@ -21,8 +21,8 @@ config = configparser.RawConfigParser()
 rest_mode = False
 config.optionxform = str
 
-if os.path.isfile('config'):
-    config.read('config')
+if os.path.isfile('config.ini'):
+    config.read('config.ini')
     print("####")
 else:
     print("@@@@")
