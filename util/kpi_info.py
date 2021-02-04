@@ -79,8 +79,7 @@ def init(kpi_indices_file):
 
     kpi_list = []
 
-    for i, kpi in enumerate(kpis):
-        print("i", i)
+    for kpi in kpis:
         print("kpi", kpi)
         kpi_obj = KPI(i, *kpi)
         kpi_list.append(kpi_obj)
