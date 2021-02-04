@@ -48,7 +48,8 @@ def run():
     #    localizer_config.get_dst_path('kpi_indices.txt'))
 
     kpi_info.init(localizer_config.get_meta_path('kpi_indices'))
-    print(kpi_info.kpi_list)
+    for item in kpi_info.kpi_list:
+        print(item.descr())
     exit()
 
 
