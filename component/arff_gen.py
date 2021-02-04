@@ -38,7 +38,7 @@ def gen_file(exps, arff_path, fromzero=False):
     # attach attributes
     for i, kpi in enumerate(kpi_info.kpi_list):
         lines.append("@attribute {kpi_name} {{TRUE, FALSE}}"
-                     .format(kpi_name='_'.join(eval(kpi.tag))))
+                     .format(kpi_name='a'+str(i)))
     # attach fault types
     exptag_name = config.get('exp_tag', 'tag')
     exptag_klass = localizer_config.get_plugin('exp_tag', exptag_name)
