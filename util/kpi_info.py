@@ -74,15 +74,21 @@ __rsc_cnt = {}
 def init(kpi_indices_file):
     global kpi_list
 
+    print("kpi_indices_file", kpi_indices_file)
+
     with open(kpi_indices_file) as f:
         kpis = f.read()
 
+    print(len(kpis))
+
     kpi_list = []
 
+    ii = 0
     for kpi in kpis:
         print("kpi", kpi)
-        kpi_obj = KPI(i, *kpi)
+        kpi_obj = KPI(ii, *kpi)
         kpi_list.append(kpi_obj)
+        ii += 1
 
     print(kpi_list)
 
