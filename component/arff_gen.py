@@ -64,8 +64,8 @@ def gen_file(exps, arff_path, fromzero=False):
                                set())
             # create boolean list
             booleans = ["FALSE"] * len(kpi_info.kpi_list)
-            print(len(booleans))
-            print(len(anomalies))
+            # print(len(booleans))
+            # print(len(anomalies))
             for idx in anomalies:
                 booleans[idx] = "TRUE"
 

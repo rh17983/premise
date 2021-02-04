@@ -23,9 +23,6 @@ config.optionxform = str
 
 if os.path.isfile('config.ini'):
     config.read('config.ini')
-    print("####")
-else:
-    print("@@@@")
 
 
 def load(filename):
