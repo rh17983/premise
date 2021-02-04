@@ -46,9 +46,9 @@ def run():
     # Write KPI indices
     # kpi_info.write_kpi_indices(
     #    localizer_config.get_dst_path('kpi_indices.txt'))
-    print(localizer_config.get_meta_path('kpi_indices.txt'))
+    print(localizer_config.get_meta_path('kpi_indices'))
     exit()
-    kpi_info.init(localizer_config.get_meta_path('kpi_indices.txt'))
+    kpi_info.init(localizer_config.get_meta_path('kpi_indices'))
     print(kpi_info.kpi_list)
     exit()
 
