@@ -47,10 +47,11 @@ def run():
     # kpi_info.write_kpi_indices(
     #    localizer_config.get_dst_path('kpi_indices.txt'))
 
+    # Rahim added this function as an alternative to SCAPI oriented kpi_info.initialize(f.read())
     kpi_info.init(localizer_config.get_meta_path('kpi_indices'))
-    for item in kpi_info.kpi_list:
-        input(item.desc())
-    exit()
+    # for item in kpi_info.kpi_list:
+    #     input(item.desc())
+    # exit()
 
 
     # Process the original file and put it to
