@@ -88,7 +88,7 @@ def init(kpi_indices_file):
 
         input(kpi_id, kpi_res, kpi_group, kpi_metric)
 
-        kpi_obj = KPI(kpi_id, kpi_res, kpi_group, kpi_metric)
+        kpi_obj = KPI({kpi_id, kpi_res, kpi_group, kpi_metric})
         kpi_list.append(kpi_obj)
 
 
