@@ -44,7 +44,7 @@ def gen_file(exps, arff_path, fromzero=False):
     exptag_klass = localizer_config.get_plugin('exp_tag', exptag_name)
     import util.runtime as runtime
     #lines.append('@attribute class {{{types}}}'.format(types=','.join(runtime.all_classes)))
-    lines.append('@attribute class {{{types}}}'.format(types="failurefree_none,MemL_0,MemL_1,MemL_2,MemL_3,MemL_4,MemL_5,MemL_6,MemL_7,MemL_8,MemL_9,PacL_0,PacL_1,PacL_2,PacL_3,PacL_4,PacL_5,PacL_6,PacL_7,PacL_8,PacL_9CpuH_0,CpuH_1,CpuH_2,CpuH_3,CpuH_4,CpuH_5,CpuH_6,CpuH_7,CpuH_8,CpuH_9"))
+    lines.append('@attribute class {{{types}}}'.format(types="failurefree_none,MemL_0,MemL_1,MemL_2,MemL_3,MemL_4,MemL_5,MemL_6,MemL_7,MemL_8,MemL_9,PacL_0,PacL_1,PacL_2,PacL_3,PacL_4,PacL_5,PacL_6,PacL_7,PacL_8,PacL_9,CpuH_0,CpuH_1,CpuH_2,CpuH_3,CpuH_4,CpuH_5,CpuH_6,CpuH_7,CpuH_8,CpuH_9"))
     lines.append('')
 
     # attach instances
