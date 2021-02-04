@@ -46,6 +46,7 @@ def init(arff_path, dst_path):
     global __predictors
 
     data = converters.load_any_file(arff_path)
+    print("arff loaded")
     data.class_is_last()
 
     lines = []

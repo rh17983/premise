@@ -83,7 +83,7 @@ def init(kpi_indices_file):
         kpi_id = kpi.split(", ")[0].split(":")[1]
         kpi_res = kpi.split(", ")[1].split(": ")[1]
         kpi_group = kpi.split(", ")[2].split(": ")[1]
-        kpi_metric = kpi.split(", ")[3].split(": ")[1]
+        kpi_metric = kpi.split(", ")[3].split(": ")[1].strip("\n")
 
         kpi_obj = KPI(kpi_id, kpi_res, kpi_group, kpi_metric)
         kpi_list.append(kpi_obj)
