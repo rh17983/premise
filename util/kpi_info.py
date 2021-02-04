@@ -77,11 +77,7 @@ def init(kpi_indices_file):
     file1 = open(kpi_indices_file, 'r')
     kpis = file1.readlines()
 
-    print(len(kpis))
-
     kpi_list = []
-
-    ii = 0
     for kpi in kpis:
         print(kpi)
 
@@ -90,13 +86,10 @@ def init(kpi_indices_file):
         kpi_group = kpi.split(", ")[2].split(": ")[1]
         kpi_metric = kpi.split(", ")[3].split(": ")[1]
 
-        print(kpi_id, kpi_res, kpi_group, kpi_metric)
+        input(kpi_id, kpi_res, kpi_group, kpi_metric)
 
-        # kpi_obj = KPI(ii, *kpi)
-        # kpi_list.append(kpi_obj)
-        ii += 1
-
-    print(kpi_list)
+        kpi_obj = KPI(kpi_id, kpi_res, kpi_group, kpi_metric)
+        kpi_list.append(kpi_obj)
 
 
 
