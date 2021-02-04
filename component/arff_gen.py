@@ -51,7 +51,6 @@ def gen_file(exps, arff_path, fromzero=False):
     lines.append('@data')
     sliding_window = config.getint('predictor', 'sliding_window')
     for exp_id, exp in exps.items():
-        print(exp)
         data = exp.exp_data
         tag = exptag_klass.tag(exp)
 
