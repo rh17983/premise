@@ -28,10 +28,11 @@ def run():
         None
     """
 
-    #if config.has_option('default', 'max_heapsize'):
-        # jvm.start(config.get('default', 'max_heapsize'))
-    #else:
-        # jvm.start()
+    if config.has_option('default', 'max_heapsize'):
+        jvm.start(config.get('default', 'max_heapsize'))
+    else:
+        jvm.start()
+
     # Create the target folder
     dst_folder = localizer_config.get_folder('dst')
     localizer_config.reset_path(dst_folder)
@@ -52,7 +53,6 @@ def run():
     # for item in kpi_info.kpi_list:
     #     input(item.desc())
     # exit()
-
 
     # Process the original file and put it to
     if localizer_config.component_enabled('preprocess'):
