@@ -37,14 +37,14 @@ def run():
     localizer_config.reset_path(dst_folder)
 
     # Load KPI
-    kpi_meta = localizer_config.get_meta_path('kpi')
-
-    with open(kpi_meta) as f:
-        localizer_log.msg("Reading kpi file...")
-        kpi_info.initialize(f.read())
+    # kpi_meta = localizer_config.get_meta_path('kpi')
+    #
+    # with open(kpi_meta) as f:
+    #   localizer_log.msg("Reading kpi file...")
+    #    kpi_info.initialize(f.read())
     # Write KPI indices
-    kpi_info.write_kpi_indices(
-        localizer_config.get_dst_path('kpi_indices.txt'))
+    # kpi_info.write_kpi_indices(
+    #    localizer_config.get_dst_path('kpi_indices.txt'))
 
     # Process the original file and put it to
     if localizer_config.component_enabled('preprocess'):
