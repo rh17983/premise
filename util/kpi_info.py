@@ -70,6 +70,25 @@ kpi_list = []
 __rsc_cnt = {}
 
 
+# Rahim added this function
+def init(kpi_indices_file):
+    global kpi_list
+
+    with open(kpi_indices_file) as f:
+        kpis = f.read()
+
+    kpi_list = []
+
+    for i, kpi in enumerate(kpis):
+        print("i", i)
+        print("kpi", kpi)
+        kpi_obj = KPI(i, *kpi)
+        kpi_list.append(kpi_obj)
+
+    print(kpi_list)
+
+
+
 def initialize(kpi_strings):
     """Initialize the list from a string.
 
@@ -97,7 +116,6 @@ def initialize(kpi_strings):
         kpi_list = []
         __rsc_cnt = {}
         for i, kpi in enumerate(kpis):
-            print(i, kpi)
             kpi_obj = KPI(i, *kpi) if kpi else None
             kpi_list.append(kpi_obj)
             rsc = kpi_obj.resource
