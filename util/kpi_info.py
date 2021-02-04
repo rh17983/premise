@@ -74,10 +74,8 @@ __rsc_cnt = {}
 def init(kpi_indices_file):
     global kpi_list
 
-    print("kpi_indices_file", kpi_indices_file)
-
-    with open(kpi_indices_file) as f:
-        kpis = f.read()
+    file1 = open(kpi_indices_file, 'r')
+    kpis = file1.readlines()
 
     print(len(kpis))
 
