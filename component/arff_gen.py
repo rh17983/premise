@@ -37,8 +37,8 @@ def gen_file(exps, arff_path, fromzero=False):
 
     # attach attributes
     for i, kpi in enumerate(kpi_info.kpi_list):
-        lines.append("@attribute {kpi_name} {{TRUE, FALSE}}"
-                     .format(kpi_name='_'.join(eval(kpi.tag))))
+        lines.append("@attribute {kpi_name} {{TRUE, FALSE}}".format(kpi_name='_'.join(eval(kpi.tag))))
+
     # attach fault types
     exptag_name = config.get('exp_tag', 'tag')
     exptag_klass = localizer_config.get_plugin('exp_tag', exptag_name)
@@ -51,6 +51,8 @@ def gen_file(exps, arff_path, fromzero=False):
     lines.append('@data')
     sliding_window = config.getint('predictor', 'sliding_window')
     for exp_id, exp in exps.items():
+        print(exp.exp_info['fault_type'])
+        exit()
         data = exp.exp_data
         tag = exptag_klass.tag(exp)
 

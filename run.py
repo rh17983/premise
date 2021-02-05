@@ -77,7 +77,7 @@ def run():
 
     if localizer_config.component_enabled('predictor'):
         localizer_log.msg("Prediction enabled.")
-        localizer_log.msg("Runing prediction")
+        localizer_log.msg("Running prediction")
         dst_path = localizer_config.get_dst_path('predictions.txt')
         weka_predict.init(arff_path, dst_path)
         for exp_id, exp in runtime.targets_exps.items():
