@@ -1,0 +1,53 @@
+Using classifier: LMT, options: ['-I', '-1', '-M', '15', '-W', '0.0']
+
+Correctly Classified Instances         518              100      %
+Incorrectly Classified Instances         0                0      %
+Kappa statistic                          1     
+Mean absolute error                      0.0243
+Root mean squared error                  0.0688
+Relative absolute error                 46.649  %
+Root relative squared error             42.897  %
+Total Number of Instances              518     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     failurefree_none
+                 ?        0.000    ?          ?        ?          ?        ?         ?         MemL_0
+                 ?        0.000    ?          ?        ?          ?        ?         ?         MemL_1
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     MemL_2
+                 ?        0.000    ?          ?        ?          ?        ?         ?         MemL_3
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     MemL_4
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     MemL_5
+                 ?        0.000    ?          ?        ?          ?        ?         ?         MemL_6
+                 ?        0.000    ?          ?        ?          ?        ?         ?         MemL_7
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     MemL_8
+                 ?        0.000    ?          ?        ?          ?        ?         ?         MemL_9
+                 ?        0.000    ?          ?        ?          ?        ?         ?         PacL_0
+                 ?        0.000    ?          ?        ?          ?        ?         ?         PacL_1
+                 ?        0.000    ?          ?        ?          ?        ?         ?         PacL_2
+                 ?        0.000    ?          ?        ?          ?        ?         ?         PacL_3
+                 ?        0.000    ?          ?        ?          ?        ?         ?         PacL_4
+                 ?        0.000    ?          ?        ?          ?        ?         ?         PacL_5
+                 ?        0.000    ?          ?        ?          ?        ?         ?         PacL_6
+                 ?        0.000    ?          ?        ?          ?        ?         ?         PacL_7
+                 ?        0.000    ?          ?        ?          ?        ?         ?         PacL_8
+                 ?        0.000    ?          ?        ?          ?        ?         ?         PacL_9
+                 ?        0.000    ?          ?        ?          ?        ?         ?         CpuH_0
+                 ?        0.000    ?          ?        ?          ?        ?         ?         CpuH_1
+                 ?        0.000    ?          ?        ?          ?        ?         ?         CpuH_2
+                 ?        0.000    ?          ?        ?          ?        ?         ?         CpuH_3
+                 ?        0.000    ?          ?        ?          ?        ?         ?         CpuH_4
+                 ?        0.000    ?          ?        ?          ?        ?         ?         CpuH_5
+                 ?        0.000    ?          ?        ?          ?        ?         ?         CpuH_6
+                 ?        0.000    ?          ?        ?          ?        ?         ?         CpuH_7
+                 ?        0.000    ?          ?        ?          ?        ?         ?         CpuH_8
+                 ?        0.000    ?          ?        ?          ?        ?         ?         CpuH_9
+Weighted Avg.    1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     
+
+
+
+
+
+Model           	Precision   	Recall      	F-measure   	Accuracy    	FPR         
+LMT             	100.000     	100.000     	100.000     	100.000     	0.000       
