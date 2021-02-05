@@ -13,6 +13,21 @@ from util.localizer_config import config
 import util.kpi_info as kpi_info
 
 
+# Rahim added these pair_id_list and faults lists
+pair_id_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+faults = ["MemL@Exp", "MemL@Lin", "MemL@Rnd", "PacL@Lin", "PacL@Exp", "PacL@Rnd", "CpuH@Exp", "CpuH@Lin","CpuH@Rnd"]
+
+
+# Rahim added this helper function
+def gen_classes_all_str(faults, pair_id_list):
+    classes = ["failurefree_none"]
+    for fault in faults:
+        for pair_id in pair_id_list:
+            classes.append(fault + "_" + str(pair_id))
+
+    return ",".join(classes)
+
+
 def gen_file(exps, arff_path, fromzero=False):
     """Generates the WEKA arff file.
 
@@ -43,20 +58,19 @@ def gen_file(exps, arff_path, fromzero=False):
     exptag_name = config.get('exp_tag', 'tag')
     exptag_klass = localizer_config.get_plugin('exp_tag', exptag_name)
     import util.runtime as runtime
-    #lines.append('@attribute class {{{types}}}'.format(types=','.join(runtime.all_classes)))
-    lines.append('@attribute class {{{types}}}'.format(types="failurefree_none,MemL_0,MemL_1,MemL_2,MemL_3,MemL_4,MemL_5,MemL_6,MemL_7,MemL_8,MemL_9,PacL_0,PacL_1,PacL_2,PacL_3,PacL_4,PacL_5,PacL_6,PacL_7,PacL_8,PacL_9,CpuH_0,CpuH_1,CpuH_2,CpuH_3,CpuH_4,CpuH_5,CpuH_6,CpuH_7,CpuH_8,CpuH_9"))
+
+    # Rahim commented this
+    # lines.append('@attribute class {{{types}}}'.format(types=','.join(runtime.all_classes)))
+
+    # Rahim added this line (replaced the previous one with this)
+    lines.append('@attribute class {{{types}}}'.format(types=gen_classes_all_str(faults, pair_id_list)))
+
     lines.append('')
 
     # attach instances
     lines.append('@data')
     sliding_window = config.getint('predictor', 'sliding_window')
     for exp_id, exp in exps.items():
-        for uu in exp.exp_info:
-            print(uu, ": ", exp.exp_info[uu])
-        input(exp.exp_info['fault_type'])
-
-        continue
-
         data = exp.exp_data
         tag = exptag_klass.tag(exp)
 

@@ -83,8 +83,7 @@ def add_all(*args):
 
     exptag_name = config.get('exp_tag', 'tag')
     exptag_klass = localizer_config.get_plugin('exp_tag', exptag_name)
-    all_classes = list(set([exptag_klass.tag(exp)
-                       for exp in all_exps.values()]))
+    all_classes = list(set([exptag_klass.tag(exp) for exp in all_exps.values()]))
 
 
 def add_exp(exp_dir, group):
