@@ -76,6 +76,7 @@ def add_all(*args):
     cache = localizer_config.load_cache('runtime', 'all_exps')
     if cache:
         all_exps = cache
+        print("from cache")
     else:
         for folder in args:
             print(folder)
