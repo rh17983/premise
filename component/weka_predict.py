@@ -123,6 +123,8 @@ def pred_seq(exp, arff_path, dst_folder):
     global __predictors
     import util.runtime as runtime
     import weka.core.converters as converters
+    print("runtime.all_classes:", runtime.all_classes)
+    input("next>>")
     data = converters.load_any_file(arff_path)
     data.class_is_last()
     for cls_name, cls in __predictors.items():
