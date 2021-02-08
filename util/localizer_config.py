@@ -304,6 +304,7 @@ def load_cache(target, filename):
 
     folder = os.path.join('caches', target)
     path = os.path.join(folder, filename + '.cache')
+    print("cache path", path)
     if not cache_enabled(target):
         localizer_log.msg("Cache not enabled for {target_name}."
                           .format(target_name=target))
