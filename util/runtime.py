@@ -78,6 +78,8 @@ def add_all(*args):
         all_exps = cache
     else:
         for folder in args:
+            print(folder)
+            input(">>")
             add_folder(folder, all_exps)
         localizer_config.save_cache(all_exps, 'runtime', 'all_exps')
 
