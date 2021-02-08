@@ -76,6 +76,7 @@ def gen_file(exps, arff_path, fromzero=False):
 
         for current, d in enumerate(data):
             if not fromzero and current + 1 < sliding_window:
+                input(current + 1 - fromzero)
                 continue
 
             start = max(0, current + 1 - sliding_window)
