@@ -124,8 +124,10 @@ def pred_seq(exp, arff_path, dst_folder):
     global __predictors
     import util.runtime as runtime
     import weka.core.converters as converters
+
     data = converters.load_any_file(arff_path)
     data.class_is_last()
+
     for cls_name, cls in __predictors.items():
         f_path = os.path.join(dst_folder, cls_name + '.txt')
         with open(f_path, 'w') as f:
