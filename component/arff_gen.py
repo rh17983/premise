@@ -71,13 +71,16 @@ def gen_file(exps, arff_path, fromzero=False):
     lines.append('@data')
     sliding_window = config.getint('predictor', 'sliding_window')
     for exp_id, exp in exps.items():
+
         data = exp.exp_data
         tag = exptag_klass.tag(exp)
 
+        the_counter = 0
         for current, d in enumerate(data):
             if not fromzero and current + 1 < sliding_window:
-                input(current + 1 - fromzero)
                 continue
+
+            the_counter += 1
 
             start = max(0, current + 1 - sliding_window)
             anomalies = reduce(lambda s1, s2: s1.union(s2),
@@ -93,6 +96,9 @@ def gen_file(exps, arff_path, fromzero=False):
             lines.append("{booleans}, {tag}"
                          .format(booleans=', '.join(booleans),
                                  tag=tag))
+
+        print("exp_id:", exp_id, "the_counter:", the_counter)
+        input("NEXT >>")
 
     with open(arff_path, 'w') as f:
         f.writelines('\n'.join(lines))
