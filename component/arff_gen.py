@@ -15,7 +15,7 @@ import util.kpi_info as kpi_info
 
 # Rahim added these pair_id_list and faults lists
 pair_id_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-faults = ["MemL@Exp", "MemL@Lin", "MemL@Rnd", "PacL@Lin", "PacL@Exp", "PacL@Rnd", "CpuH@Exp", "CpuH@Lin","CpuH@Rnd"]
+faults = ["MemL@Exp", "MemL@Lin", "MemL@Rnd", "PacL@Lin", "none", "PacL@Exp", "PacL@Rnd", "CpuH@Exp", "CpuH@Lin","CpuH@Rnd"]
 
 
 # Rahim added this helper function
@@ -67,8 +67,6 @@ def gen_file(exps, arff_path, fromzero=False):
 
     # Rahim added this lines
     fault_injection_minutes = [92, 110, 67, 32, 0, 50, 57, 34, 43, 56]
-    faults = ["MemL-Exp", "MemL-Lin", "MemL-Rnd", "PacL-Lin", "none", "PacL-Exp", "PacL-Rnd", "CpuH-Exp", "CpuH-Lin",
-              "CpuH-Rnd"]
 
     lines.append('')
 
@@ -82,7 +80,7 @@ def gen_file(exps, arff_path, fromzero=False):
 
         # Rahim added this lines
         sets_fault_string = str(tag).split("_")[0]
-        sets_exp_code = int(faults.index(sets_fault_string.replace("@", "-")))
+        sets_exp_code = int(faults.index(sets_fault_string))
         fault_injection_minute = fault_injection_minutes[sets_exp_code]
 
         print("exp_id:", exp_id, ". tag:", tag, ". data len:", len(data), "fault_injection_minute:", fault_injection_minute)
@@ -102,6 +100,10 @@ def gen_file(exps, arff_path, fromzero=False):
             # print(len(anomalies))
             for idx in anomalies:
                 booleans[idx] = "TRUE"
+
+            # Rahim added this
+            if current >= fault_injection_minute - 1:
+                tag = "failurefree_none"
 
             lines.append("{booleans}, {tag}"
                          .format(booleans=', '.join(booleans),
