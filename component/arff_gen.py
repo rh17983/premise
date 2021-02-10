@@ -65,6 +65,11 @@ def gen_file(exps, arff_path, fromzero=False):
     # Rahim added this line (replaced the previous one with this)
     lines.append('@attribute class {{{types}}}'.format(types=gen_classes_all_str(faults, pair_id_list)))
 
+    # Rahim added this lines
+    fault_injection_minutes = [92, 110, 67, 32, 0, 50, 57, 34, 43, 56]
+    faults = ["MemL-Exp", "MemL-Lin", "MemL-Rnd", "PacL-Lin", "none", "PacL-Exp", "PacL-Rnd", "CpuH-Exp", "CpuH-Lin",
+              "CpuH-Rnd"]
+
     lines.append('')
 
     # attach instances
@@ -75,12 +80,17 @@ def gen_file(exps, arff_path, fromzero=False):
         data = exp.exp_data
         tag = exptag_klass.tag(exp)
 
-        the_counter = 0
+        # Rahim added this lines
+        sets_fault_string = str(tag).split("_")[0]
+        sets_exp_code = int(faults.index(sets_fault_string.replace("@", "-")))
+        fault_injection_minute = fault_injection_minutes[sets_exp_code]
+
+        print("exp_id:", exp_id, ". tag:", tag, ". data len:", len(data), "fault_injection_minute:", fault_injection_minute)
+        input("NEXT>>")
+
         for current, d in enumerate(data):
             if not fromzero and current + 1 < sliding_window:
                 continue
-
-            the_counter += 1
 
             start = max(0, current + 1 - sliding_window)
             anomalies = reduce(lambda s1, s2: s1.union(s2),
@@ -96,9 +106,6 @@ def gen_file(exps, arff_path, fromzero=False):
             lines.append("{booleans}, {tag}"
                          .format(booleans=', '.join(booleans),
                                  tag=tag))
-
-        print("exp_id:", exp_id, "the_counter:", the_counter)
-        input("NEXT >>")
 
     with open(arff_path, 'w') as f:
         f.writelines('\n'.join(lines))
