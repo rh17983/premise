@@ -73,7 +73,9 @@ def run():
         exps = runtime.all_exps
 
     arff_path = localizer_config.get_dst_path('training.arff')
-    arff_gen.gen_file(exps, arff_path)
+
+    # Rahim: changed def value to True
+    arff_gen.gen_file(exps, arff_path, "training", True)
 
     if localizer_config.component_enabled('predictor'):
         localizer_log.msg("Prediction enabled.")
@@ -85,7 +87,7 @@ def run():
                 exp.exp_info['full_name'])
             localizer_config.reset_path(exp_dst_path)
             exp_arff_path = os.path.join(exp_dst_path, 'target.arff')
-            arff_gen.gen_file({exp_id: exp}, exp_arff_path, fromzero=True)
+            arff_gen.gen_file({exp_id: exp}, exp_arff_path, "test", fromzero=True)
             weka_predict.pred_seq(exp, exp_arff_path, exp_dst_path)
     else:
         localizer_log.msg("Prediction not enabled.")

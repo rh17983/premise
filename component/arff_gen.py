@@ -28,7 +28,7 @@ def gen_classes_all_str(faults, pair_id_list):
     return ",".join(classes)
 
 
-def gen_file(exps, arff_path, fromzero=False):
+def gen_file(exps, arff_path, data_set_type, fromzero=False):
     """Generates the WEKA arff file.
 
     The anomalies will be aggregated by a fixed length of window. For instance,
@@ -81,7 +81,11 @@ def gen_file(exps, arff_path, fromzero=False):
         # Rahim added this lines
         sets_fault_string = str(tag).split("_")[0]
         sets_exp_code = int(faults.index(sets_fault_string))
-        fault_injection_minute = fault_injection_minutes[sets_exp_code]
+
+        if data_set_type == "test":
+            fault_injection_minute = fault_injection_minutes[sets_exp_code]
+        else:
+            fault_injection_minute = 0
 
         print("exp_id:", exp_id, ". tag:", tag, ". data len:", len(data), "fault_injection_minute:", fault_injection_minute)
         input("NEXT>>")
@@ -102,8 +106,9 @@ def gen_file(exps, arff_path, fromzero=False):
                 booleans[idx] = "TRUE"
 
             # Rahim added this
-            if current >= fault_injection_minute - 1:
-                tag = "failurefree_none"
+            if data_set_type == "test":
+                if current < fault_injection_minute - 1:
+                    tag = "failurefree_none"
 
             lines.append("{booleans}, {tag}"
                          .format(booleans=', '.join(booleans),
