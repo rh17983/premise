@@ -107,11 +107,14 @@ def gen_file(exps, arff_path, data_set_type, fromzero=False):
             # Rahim added this
             if data_set_type == "test":
                 if current < fault_injection_minute - 1:
-                    tag = "failurefree_none"
+                    the_tag = "failurefree_none"
+                else:
+                    the_tag = tag
+
 
             lines.append("{booleans}, {tag}"
                          .format(booleans=', '.join(booleans),
-                                 tag=tag))
+                                 tag=the_tag))
 
     with open(arff_path, 'w') as f:
         f.writelines('\n'.join(lines))
