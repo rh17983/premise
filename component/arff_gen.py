@@ -80,9 +80,8 @@ def gen_file(exps, arff_path, data_set_type, fromzero=False):
 
         # Rahim added this lines
         sets_fault_string = str(tag).split("_")[0]
-        sets_exp_code = int(faults.index(sets_fault_string))
-
         if data_set_type == "test":
+            sets_exp_code = int(faults.index(sets_fault_string))
             fault_injection_minute = fault_injection_minutes[sets_exp_code]
         else:
             fault_injection_minute = 0
