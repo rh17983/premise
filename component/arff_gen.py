@@ -105,12 +105,10 @@ def gen_file(exps, arff_path, data_set_type, fromzero=False):
                 booleans[idx] = "TRUE"
 
             # Rahim added this
+            the_tag = tag
             if data_set_type == "test":
                 if current < fault_injection_minute - 1:
                     the_tag = "failurefree_none"
-                else:
-                    the_tag = tag
-
 
             lines.append("{booleans}, {tag}"
                          .format(booleans=', '.join(booleans),
