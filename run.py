@@ -81,14 +81,14 @@ def run():
         localizer_log.msg("Prediction enabled.")
         localizer_log.msg("Running prediction")
         dst_path = localizer_config.get_dst_path('predictions.txt')
-        # weka_predict.init(arff_path, dst_path)
+        weka_predict.init(arff_path, dst_path)
         for exp_id, exp in runtime.targets_exps.items():
             exp_dst_path = localizer_config.get_dst_path(
                 exp.exp_info['full_name'])
             localizer_config.reset_path(exp_dst_path)
             exp_arff_path = os.path.join(exp_dst_path, 'target.arff')
             arff_gen.gen_file({exp_id: exp}, exp_arff_path, "test", fromzero=True)
-            # weka_predict.pred_seq(exp, exp_arff_path, exp_dst_path)
+            weka_predict.pred_seq(exp, exp_arff_path, exp_dst_path)
     else:
         localizer_log.msg("Prediction not enabled.")
     jvm.stop()

@@ -87,7 +87,7 @@ def gen_file(exps, arff_path, data_set_type, fromzero=False):
             fault_injection_minute = 0
 
         print("exp_id:", exp_id, ". tag:", tag, ". data len:", len(data), "fault_injection_minute:", fault_injection_minute)
-        input("NEXT>>")
+        # input("NEXT>>")
 
         for current, d in enumerate(data):
             if not fromzero and current + 1 < sliding_window:
