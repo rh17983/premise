@@ -21,19 +21,24 @@ all_exps = {}
 all_classes = []
 
 # Rahim
-faults = ["MemL@Exp", "MemL@Lin", "MemL@Rnd", "PacL@Lin", "none", "PacL@Exp", "PacL@Rnd", "CpuH@Exp", "CpuH@Lin", "CpuH@Rnd"]
+all_faults = ["MemL@Exp", "MemL@Lin", "MemL@Rnd", "PacL@Lin", "PacL@Exp", "PacL@Rnd", "CpuH@Exp", "CpuH@Lin", "CpuH@Rnd"]
 
 
 # Rahim added this helper function
-def generate_classes_all(faults):
+def generate_classes_all(all_faults, all_classes):
     pairs_number = 10
-    classes = ["failurefree_none"]
 
-    for fault in faults:
+    the_class = "failurefree_none"
+    if the_class not in all_classes:
+        all_classes.append(the_class)
+
+    for fault in all_faults:
         for pair_id in range(pairs_number):
-            classes.append(fault + "_" + str(pair_id))
+            the_class = fault + "_" + str(pair_id)
+            if the_class not in all_classes:
+                all_classes.append(the_class)
 
-    return ",".join(classes)
+    return all_classes
 
 
 def add_folder(folder, group):
@@ -102,8 +107,11 @@ def add_all(*args):
     exptag_name = config.get('exp_tag', 'tag')
     exptag_klass = localizer_config.get_plugin('exp_tag', exptag_name)
     all_classes = list(set([exptag_klass.tag(exp) for exp in all_exps.values()]))
+    # Rahim: line added
+    all_classes = generate_classes_all(all_faults, all_classes)
+    # Rahim: line added
     print("all_classes:", all_classes)
-    # generate_classes_all(faults)
+
 
 
 def add_exp(exp_dir, group):
