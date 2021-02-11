@@ -10,8 +10,8 @@ import configparser
 
 __config = configparser.RawConfigParser()
 __config.optionxform = str
-if os.path.isfile('config'):
-    __config.read('config')
+if os.path.isfile('config.ini'):
+    __config.read('config.ini')
 
 __TAGS = {'info': 'INFO',
           'debug': 'DEBUG',
@@ -35,7 +35,7 @@ def msg(s):
         None
     """
     global __config
-    if __config.getboolean('msg', 'debug'):
+    if __config.getboolean('default', 'debug'):
         output(s, 'debug')
 
 

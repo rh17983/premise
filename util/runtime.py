@@ -240,7 +240,7 @@ class Observation(object):
             None
         """
         # Read faulty or not
-        if config.get('def', 'nonfaulty_pattern') in exp_name:
+        if config.get('default', 'nonfaulty_pattern') in exp_name:
             faulty = False
         else:
             faulty = True
@@ -268,9 +268,13 @@ class Observation(object):
         Returns:
             None
         """
+
         time_series = sorted([int(f.replace('.txt', '')) for f in
                               [x for x in os.listdir(exp_dir) if '.txt' in x]])
         self.time_list = time_series
+
+        print("add_data from {exp_dir}. Number: {time_series_len}".format(exp_dir=exp_dir,
+                                                                          time_series_len=len(time_series)))
 
         # The set that contains all appeared anomalies
         self.appeared_anomalies = set()

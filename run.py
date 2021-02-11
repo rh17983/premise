@@ -27,21 +27,10 @@ def run():
         None
     """
 
-    if config.has_option('default', 'debug'):
-        print("default-debug exists")
-    else:
-        print("default-debug does not exist")
-
-    if config.has_option('ramin', 'ramin'):
-        print("ramin exists")
-    else:
-        print("no")
-
     if config.has_option('default', 'max_heapsize'):
-        print("default-max_heapsize exists")
         jvm.start(config.get('default', 'max_heapsize'))
     else:
-        print("default-max_heapsize does not exist")
+        localizer_log.msg("default->max_heapsize record does not exist")
         jvm.start()
 
     # Create the target folder
@@ -60,10 +49,12 @@ def run():
     #    localizer_config.get_dst_path('kpi_indices.txt'))
 
     # Rahim added this function as an alternative to SCAPI oriented kpi_info.initialize(f.read())
+    localizer_log.msg("Initialising KPIs...")
     kpi_info.init(localizer_config.get_meta_path('kpi_indices'))
     # for item in kpi_info.kpi_list:
     #     input(item.desc())
     # exit()
+    localizer_log.msg("KPIs initialised")
 
     # Process the original file and put it to
     if localizer_config.component_enabled('preprocess'):
@@ -76,32 +67,46 @@ def run():
     if config.has_option('folder', 'target'):
         target_dir = localizer_config.get_src_path('target')
         runtime.add_target(target_dir)
-    localizer_log.msg("Finish Reading.")
+    localizer_log.msg("Reading experiments completed.")
 
     if localizer_config.component_enabled('exp_filter'):
         exps = exp_filter_manager.filter_(runtime.all_exps)
+        localizer_log.msg("Exp. filter applied.")
     else:
         exps = runtime.all_exps
+        localizer_log.msg("No exp. filter applied.")
 
     arff_path = localizer_config.get_dst_path('training.arff')
 
     # Rahim: changed def value to True
+    localizer_log.msg("Start generating the training.arff file.")
     arff_gen.gen_file(exps, arff_path, "training", True)
+    localizer_log.msg("The training.arff generated.")
 
     if localizer_config.component_enabled('predictor'):
+
         localizer_log.msg("Prediction enabled.")
-        localizer_log.msg("Running prediction")
         dst_path = localizer_config.get_dst_path('predictions.txt')
+
+        localizer_log.msg("Start training.")
         weka_predict.init(arff_path, dst_path)
+        localizer_log.msg("Training completed.")
+
         for exp_id, exp in runtime.targets_exps.items():
-            exp_dst_path = localizer_config.get_dst_path(
-                exp.exp_info['full_name'])
+            exp_dst_path = localizer_config.get_dst_path(exp.exp_info['full_name'])
             localizer_config.reset_path(exp_dst_path)
+
             exp_arff_path = os.path.join(exp_dst_path, 'target.arff')
+            localizer_log.msg("Start generating the " + exp_arff_path + " file.")
             arff_gen.gen_file({exp_id: exp}, exp_arff_path, "test", fromzero=True)
+            localizer_log.msg("The " + exp_arff_path + " generated.")
+
+            localizer_log.msg("Start prediction.")
             weka_predict.pred_seq(exp, exp_arff_path, exp_dst_path)
+            localizer_log.msg("Prediction completed.")
     else:
         localizer_log.msg("Prediction not enabled.")
+
     jvm.stop()
 
 
