@@ -35,8 +35,8 @@ def msg(s):
         None
     """
     global __config
-    #if __config.getboolean('default', 'debug'):
-    #    output(s, 'debug')
+    if __config.getboolean('default', 'debug'):
+        output(s, 'debug')
 
 
 def error(s):

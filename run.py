@@ -17,7 +17,6 @@ import component.arff_gen as arff_gen
 import component.exp_filter_manager as exp_filter_manager
 import component.weka_predict as weka_predict
 
-
 def run():
     """Main function of premise.
 
