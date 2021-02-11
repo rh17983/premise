@@ -240,7 +240,7 @@ class Observation(object):
             None
         """
         # Read faulty or not
-        if config.get('default', 'nonfaulty_pattern') in exp_name:
+        if config.get('def', 'nonfaulty_pattern') in exp_name:
             faulty = False
         else:
             faulty = True
