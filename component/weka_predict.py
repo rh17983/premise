@@ -73,13 +73,19 @@ def init(arff_path, dst_path):
             cls, data_ = cache
         else:
             cls = Classifier(classname=classifier, options=option_list)
+            localizer_log.msg("Start building classifier")
             cls.build_classifier(data)
+            localizer_log.msg("Completed building classifier")
             localizer_config.save_model(cls, data, classifier_name)
 
         __predictors[classifier_name] = cls
 
+        localizer_log.msg("Start evaluation classifier")
         evl = Evaluation(data)
+        localizer_log.msg("Complete evaluation classifier")
+        localizer_log.msg("Start cross-validating classifier")
         evl.crossvalidate_model(cls, data, 10, Random(1))
+        localizer_log.msg("Complete cross-validating classifier")
 
         print(evl.percent_correct)
         print(evl.summary())
