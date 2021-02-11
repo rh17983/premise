@@ -27,10 +27,10 @@ def run():
         None
     """
 
-    if config.has_option('rahim', 'rahim'):
-        print("rahim exists")
+    if config.has_option('def', 'debug'):
+        print("def-debug exists")
     else:
-        print("no")
+        print("def-debug does not exist")
 
     if config.has_option('ramin', 'ramin'):
         print("ramin exists")

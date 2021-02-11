@@ -35,7 +35,7 @@ def msg(s):
         None
     """
     global __config
-    if __config.getboolean('def', 'debug'):
+    if __config.getboolean('msg', 'debug'):
         output(s, 'debug')
 
 
