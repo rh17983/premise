@@ -134,10 +134,13 @@ def pred_seq(exp, arff_path, dst_folder):
     data.class_is_last()
     for cls_name, cls in __predictors.items():
         f_path = os.path.join(dst_folder, cls_name + '.txt')
+        print("predictions file:", f_path)
         with open(f_path, 'w') as f:
             lines = []
             for index, inst in enumerate(data):
                 pred = cls.classify_instance(inst)
+                print("Prediction:", pred, "[", int(pred), "]")
+                print("runtime.all_classes:", runtime.all_classes)
                 lines.append(runtime.all_classes[int(pred)])
             f.writelines('\n'.join(lines))
 
