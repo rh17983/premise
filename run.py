@@ -27,10 +27,10 @@ def run():
         None
     """
 
-    if config.has_option('def', 'debug'):
-        print("def-debug exists")
+    if config.has_option('default', 'debug'):
+        print("default-debug exists")
     else:
-        print("def-debug does not exist")
+        print("default-debug does not exist")
 
     if config.has_option('ramin', 'ramin'):
         print("ramin exists")
@@ -38,10 +38,10 @@ def run():
         print("no")
 
     if config.has_option('default', 'max_heapsize'):
-        print("default exists")
+        print("default-max_heapsize exists")
         jvm.start(config.get('default', 'max_heapsize'))
     else:
-        print("default does not exist")
+        print("default-max_heapsize does not exist")
         jvm.start()
 
     # Create the target folder
