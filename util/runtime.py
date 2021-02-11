@@ -20,6 +20,21 @@ targets_exps = {}
 all_exps = {}
 all_classes = []
 
+# Rahim
+faults = ["MemL@Exp", "MemL@Lin", "MemL@Rnd", "PacL@Lin", "none", "PacL@Exp", "PacL@Rnd", "CpuH@Exp", "CpuH@Lin", "CpuH@Rnd"]
+
+
+# Rahim added this helper function
+def generate_classes_all(faults):
+    pairs_number = 10
+    classes = ["failurefree_none"]
+
+    for fault in faults:
+        for pair_id in range(pairs_number):
+            classes.append(fault + "_" + str(pair_id))
+
+    return ",".join(classes)
+
 
 def add_folder(folder, group):
     """Read all experiments in a folder.
@@ -76,7 +91,7 @@ def add_all(*args):
     cache = localizer_config.load_cache('runtime', 'all_exps')
     if cache:
         all_exps = cache
-        print("from cache")
+        print("From cache.")
     else:
         for folder in args:
             # print(folder)
@@ -87,6 +102,8 @@ def add_all(*args):
     exptag_name = config.get('exp_tag', 'tag')
     exptag_klass = localizer_config.get_plugin('exp_tag', exptag_name)
     all_classes = list(set([exptag_klass.tag(exp) for exp in all_exps.values()]))
+    print("all_classes:", all_classes)
+    # generate_classes_all(faults)
 
 
 def add_exp(exp_dir, group):
