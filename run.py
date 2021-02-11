@@ -28,8 +28,10 @@ def run():
     """
 
     if config.has_option('default', 'max_heapsize'):
+        print("default exists")
         jvm.start(config.get('default', 'max_heapsize'))
     else:
+        print("default does not exist")
         jvm.start()
 
     # Create the target folder
