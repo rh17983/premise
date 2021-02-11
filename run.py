@@ -27,6 +27,16 @@ def run():
         None
     """
 
+    if config.has_option('rahim', 'rahim'):
+        print("rahim exists")
+    else:
+        print("no")
+
+    if config.has_option('ramin', 'ramin'):
+        print("ramin exists")
+    else:
+        print("no")
+
     if config.has_option('default', 'max_heapsize'):
         print("default exists")
         jvm.start(config.get('default', 'max_heapsize'))
