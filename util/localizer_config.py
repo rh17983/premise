@@ -179,8 +179,7 @@ def get_joint_path(folder, target):
 
     path = os.path.join(folder, target)
     if not os.path.exists(path):
-        localizer_log.error("Path {fname} not found! Abort."
-                            .format(fname=target))
+        localizer_log.error("Path {fname} not found! Abort.".format(fname=target))
     return path
 
 
