@@ -358,9 +358,13 @@ def load_model(filename):
     # Path to the cashed model (example: caches/model/LMT.cache)
     path = os.path.join(os.path.join('caches', 'model'), filename + '.cache')
 
+    print("Path to the cashed model to load:", path)
+
     if os.path.isfile(path):
         cached_model, cached_data_used_for_training = serialization.read_all(path)
+        print("Loading cached classifier")
         trained_classifier = Classifier(jobject=cached_model)
+        print("Loading cached data")
         training_data = Instances(jobject=cached_data_used_for_training)
         localizer_log.msg("Loaded model: {filename}".format(filename=filename))
         return [trained_classifier, training_data]

@@ -77,14 +77,14 @@ def run(mode, model_cache_file_name, evaluation_is_on):
 
     if mode == "predict":
 
+        # Load cached model
+        weka_predict.load_model(model_cache_file_name)
+
         # Reading training data from anomalies/test-data/
         localizer_log.msg("Reading data for classifications: Started.")
         target_dir = localizer_config.get_src_path('target')
         runtime.add_target(target_dir)
         localizer_log.msg("Reading data for classifications: Completed.")
-
-        # Load cached model
-        weka_predict.load_model(model_cache_file_name)
 
         # Predict
         for exp_id, exp in runtime.targets_exps.items():
