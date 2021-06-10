@@ -50,20 +50,26 @@ def run(mode, model_cache_file_name, evaluation_is_on):
     if localizer_config.component_enabled('preprocess'):
         preprocess.preprocess()
 
+    # Reading training data from anomalies/training-data
+    localizer_log.msg("Reading training data: Started.")
+    training_dir = localizer_config.get_src_path('training')  # anomalies/training-data
+    runtime.add_all(training_dir)
+    localizer_log.msg("Reading training data: Completed.")
+
+    # Reading training data from anomalies/test-data/
+    localizer_log.msg("Reading data for classifications: Started.")
+    target_dir = localizer_config.get_src_path('target')
+    runtime.add_target(target_dir)
+    localizer_log.msg("Reading data for classifications: Completed.")
+
+    if localizer_config.component_enabled('exp_filter'):
+        experiments = exp_filter_manager.filter_(runtime.all_exps)
+        localizer_log.msg("Exp. filter applied.")
+    else:
+        experiments = runtime.all_exps
+        localizer_log.msg("No exp. filter applied.")
+
     if mode == "train":
-
-        # Reading training data from anomalies/training-data
-        localizer_log.msg("Reading training data: Started.")
-        training_dir = localizer_config.get_src_path('training')  # anomalies/training-data
-        runtime.add_all(training_dir)
-        localizer_log.msg("Reading training data: Completed.")
-
-        if localizer_config.component_enabled('exp_filter'):
-            experiments = exp_filter_manager.filter_(runtime.all_exps)
-            localizer_log.msg("Exp. filter applied.")
-        else:
-            experiments = runtime.all_exps
-            localizer_log.msg("No exp. filter applied.")
 
         # Generate training data set in arff format
         localizer_log.msg("Start generating the training.arff file (data for training).")
@@ -79,12 +85,6 @@ def run(mode, model_cache_file_name, evaluation_is_on):
 
         # Load cached model
         weka_predict.load_model(model_cache_file_name)
-
-        # Reading training data from anomalies/test-data/
-        localizer_log.msg("Reading data for classifications: Started.")
-        target_dir = localizer_config.get_src_path('target')
-        runtime.add_target(target_dir)
-        localizer_log.msg("Reading data for classifications: Completed.")
 
         # Predict
         for exp_id, exp in runtime.targets_exps.items():
