@@ -106,8 +106,8 @@ def run(mode, model_cache_file_name, evaluation_is_on):
 
 
 if __name__ == '__main__':
-    mode = int(sys.argv[1])
-    model_cache_file_name = int(sys.argv[2])
-    evaluation_is_on = int(sys.argv[3])
+    mode = sys.argv[1]
+    model_cache_file_name = sys.argv[2]
+    evaluation_is_on = sys.argv[3]
 
     run(mode, model_cache_file_name, evaluation_is_on)
