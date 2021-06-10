@@ -92,8 +92,9 @@ def run(mode, model_cache_file_name, evaluation_is_on):
             localizer_config.reset_path(exp_dst_path)
 
             # Generate the target data set for predictions
-            localizer_log.msg("Start generating the " + exp_arff_path + " file.")
+            localizer_log.msg("Start generating the target.arff file (data for training).")
             exp_arff_path = os.path.join(exp_dst_path, 'target.arff')
+            localizer_log.msg("target.arff file path: " + exp_arff_path)
             arff_gen.gen_file({exp_id: exp}, exp_arff_path, "test", fromzero=True)
             localizer_log.msg("The " + exp_arff_path + " generated.")
 
