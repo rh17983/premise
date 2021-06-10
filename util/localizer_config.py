@@ -205,7 +205,7 @@ def component_enabled(component):
 
 
 def reset_path(path):
-    """Create a folder. If the folder exsit, clears what it contained.
+    """Create a folder. If the folder exists, clears what it contained.
 
     Args:
         path(stt): The path of the folder.
@@ -339,49 +339,32 @@ def save_model(model, data, filename):
     Returns:
         True if the target caching is saved, otherwise False.
     """
-    if rest_mode:
-        return
 
     folder = os.path.join('caches', 'model')
     path = os.path.join(folder, filename + '.cache')
     build_if_not_exist(folder)
     serialization.write_all(path, [model, Instances.template_instances(data)])
-    localizer_log.msg("Saved cache of {target_name}."
-                      .format(target_name='model'))
+    localizer_log.msg("Saved cache of {target_name}.".format(target_name='model'))
     return True
 
 
 def load_model(filename):
-    """Load the model from the target caching file.
-
-    The caches should be defined in the config file. See README and
-    config.sample for reference.
-
+    """ Load the model from cache.
     Args:
-        target(str): The target option in '[cached]' section in the config
-            file.
-        filename(str): The target file to load.
-
+        filename(str): The target file name (without extension) to load. Example: LMT
     Returns:
-        The classifier and data object if the target caching is saved,
-        otherwise None.
+        The classifier and data object if the target caching is saved, otherwise None.
     """
-    if rest_mode:
-        return None
 
-    folder = os.path.join('caches', 'model')
-    path = os.path.join(folder, filename + '.cache')
-    if not cache_enabled('model'):
-        localizer_log.msg("Cache not enabled for 'model'.")
-        return None
+    # Path to the cashed model (example: caches/model/LMT.cache)
+    path = os.path.join(os.path.join('caches', 'model'), filename + '.cache')
 
     if os.path.isfile(path):
-        objects = serialization.read_all(path)
-        classifier = Classifier(jobject=objects[0])
-        data = Instances(jobject=objects[1])
-        localizer_log.msg("Loaded cache {fname} of 'model'."
-                          .format(fname=filename))
-        return [classifier, data]
+        cached_model, cached_data_used_for_training = serialization.read_all(path)
+        trained_classifier = Classifier(jobject=cached_model)
+        training_data = Instances(jobject=cached_data_used_for_training)
+        localizer_log.msg("Loaded model: {filename}".format(filename=filename))
+        return [trained_classifier, training_data]
 
     localizer_log.msg("Failed to load cache of 'model'.")
     return None

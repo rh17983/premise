@@ -20,19 +20,28 @@ __classifiers = OrderedDict(__OPTIONS)
 __predictors = {}
 
 
-def init(arff_path, dst_path):
-    """Main training function of the premise prediction.
+def load_model(classifier_name):
+    """ Loads the cached classifier model and writes it to the __predictors global variable
+    :param classifier_name: name of the classifier. Example: LMT
+    :return: N/A
+    """
+    global __predictors
+    __predictors[classifier_name], data = localizer_config.load_model(classifier_name)
+
+
+def train(training_dataset_path, model_cache_file_name, evaluation_is_on, summary_file_path):
+    """Model Training function
 
     The function uses the WEKA machine learning library, implemented by
-    python-weka-wrapper Python library. It will divide the data into given
-    folds, and do the training and varification. Results and summary will be
-    written to a file.
+    python-weka-wrapper Python library. Divides the data into given
+    folds, and do the training and evaluation. Trained model copied to __predictors global variable
+    and also saved (together with training data set) to the model_cache_file_name file. Evaluation summary is being written to summary_file_path file.
 
     Args:
-        arff_path(str): The string that represents the path of the input arff
-            file.
-        dst_path(str): The string that represents the path of the output
-        summary file.
+        :param training_dataset_path: the path of the input arff file.
+        :param model_cache_file_name:
+        :param evaluation_is_on: run evaluation after training (true / false)
+        :param summary_file_path: the path of the model evaluation summary file.
 
     Returns:
         None
@@ -45,8 +54,8 @@ def init(arff_path, dst_path):
     global __classifiers
     global __predictors
 
-    data = converters.load_any_file(arff_path)
-    data.class_is_last()
+    training_data = converters.load_any_file(training_dataset_path)
+    training_data.class_is_last()
 
     lines = []
     summaries = []
@@ -57,64 +66,61 @@ def init(arff_path, dst_path):
                     'Accuracy'.ljust(12),
                     'FPR'.ljust(12)]
     summaries.append('\t'.join(summary_line))
+
     for classifier, option_str in __classifiers.items():
         option_list = re.findall(r'"(?:[^"]+)"|(?:[^ ]+)', option_str)
         option_list = [s.replace('"', '') for s in option_list]
 
         classifier_name = classifier.split('.')[-1]
-        info_str = "Using classifier: {classifier}, options: {options}"\
-            .format(classifier=classifier_name,
-                    options=str(option_list))
+        info_str = "Using classifier: {classifier}, options: {options}".format(classifier=classifier_name, options=str(option_list))
         localizer_log.msg(info_str)
         lines.append(info_str)
 
-        cache = localizer_config.load_model(classifier_name)
-        if cache:
-            cls, data_ = cache
-        else:
-            cls = Classifier(classname=classifier, options=option_list)
-            localizer_log.msg("Start building classifier")
-            cls.build_classifier(data)
-            localizer_log.msg("Completed building classifier")
-            localizer_config.save_model(cls, data, classifier_name)
+        # Train
+        cls = Classifier(classname=classifier, options=option_list)
+        localizer_log.msg("Start building classifier")
+        cls.build_classifier(training_data)
+        localizer_log.msg("Completed building classifier")
+        localizer_log.msg("Saving trained model to {model_cache_name}".format(model_cache_file_name))
+        localizer_config.save_model(cls, training_data, model_cache_file_name)
+        localizer_log.msg("Trained model saved")
 
         __predictors[classifier_name] = cls
 
-        localizer_log.msg("Start evaluation classifier")
-        evl = Evaluation(data)
-        localizer_log.msg("Complete evaluation classifier")
-        localizer_log.msg("Start cross-validating classifier")
-        evl.crossvalidate_model(cls, data, 10, Random(1))
-        localizer_log.msg("Complete cross-validating classifier")
+        if evaluation_is_on:
 
-        print(evl.percent_correct)
-        print(evl.summary())
-        print(evl.class_details())
+            # Model evaluation
+            localizer_log.msg("Start evaluation classifier")
+            evl = Evaluation(training_data)
+            localizer_log.msg("Complete evaluation classifier")
+            localizer_log.msg("Start cross-validating classifier")
+            evl.crossvalidate_model(cls, training_data, 10, Random(1))
+            localizer_log.msg("Complete cross-validating classifier")
 
-        lines.append(evl.summary())
-        lines.append(evl.class_details())
+            # print(evl.percent_correct)
+            # print(evl.summary())
+            # print(evl.class_details())
 
-        summary_line = []
-        summary_line.append(classifier_name.ljust(16))
-        summary_line.append("{:.3f}".format(evl.weighted_precision *
-                                            100).ljust(12))
-        summary_line.append("{:.3f}".format(evl.weighted_recall *
-                                            100).ljust(12))
-        summary_line.append("{:.3f}".format(evl.weighted_f_measure *
-                                            100).ljust(12))
-        summary_line.append("{:.3f}".format(evl.percent_correct).ljust(12))
-        summary_line.append("{:.3f}".format(evl.weighted_false_positive_rate *
-                                            100)
-                            .ljust(12))
-        summaries.append('\t'.join(summary_line))
+            lines.append(evl.summary())
+            lines.append(evl.class_details())
 
-    with open(dst_path, 'w') as f:
-        f.writelines('\n'.join(lines))
-        f.writelines('\n'*5)
-        f.writelines('\n'.join(summaries))
+            summary_line = []
+            summary_line.append(classifier_name.ljust(16))
+            summary_line.append("{:.3f}".format(evl.weighted_precision * 100).ljust(12))
+            summary_line.append("{:.3f}".format(evl.weighted_recall * 100).ljust(12))
+            summary_line.append("{:.3f}".format(evl.weighted_f_measure * 100).ljust(12))
+            summary_line.append("{:.3f}".format(evl.percent_correct).ljust(12))
+            summary_line.append("{:.3f}".format(evl.weighted_false_positive_rate * 100).ljust(12))
+            summaries.append('\t'.join(summary_line))
+
+            # Save evaluation summary to file
+            with open(summary_file_path, 'w') as f:
+                f.writelines('\n'.join(lines))
+                f.writelines('\n'*5)
+                f.writelines('\n'.join(summaries))
 
 
-def pred_seq(exp, arff_path, dst_folder):
+def predict(exp, arff_path, dst_folder):
     """The function to generate a detailed prediction sequence of the experiment.
 
     Args:
@@ -134,14 +140,14 @@ def pred_seq(exp, arff_path, dst_folder):
     data.class_is_last()
     for cls_name, cls in __predictors.items():
         f_path = os.path.join(dst_folder, cls_name + '.txt')
-        print("predictions file:", f_path)
+        print("Predictions file:", f_path)
         with open(f_path, 'w') as f:
             lines = []
             for index, inst in enumerate(data):
-                pred = cls.classify_instance(inst)
-                print("Prediction:", pred, "[", int(pred), "]")
+                prediction = cls.classify_instance(inst)
+                print("Prediction:", prediction, "[", int(prediction), "]")
                 print("runtime.all_classes:", runtime.all_classes)
-                lines.append(runtime.all_classes[int(pred)])
+                lines.append(runtime.all_classes[int(prediction)])
             f.writelines('\n'.join(lines))
 
 
