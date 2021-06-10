@@ -81,7 +81,7 @@ def train(training_dataset_path, model_cache_file_name, evaluation_is_on, summar
         localizer_log.msg("Start building classifier")
         cls.build_classifier(training_data)
         localizer_log.msg("Completed building classifier")
-        localizer_log.msg("Saving trained model to {model_cache_name}".format(model_cache_file_name))
+        localizer_log.msg("Saving trained model to {model_cache_name}".format(model_cache_name=model_cache_file_name))
         localizer_config.save_model(cls, training_data, model_cache_file_name)
         localizer_log.msg("Trained model saved")
 
