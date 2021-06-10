@@ -51,7 +51,7 @@ def gen_file(exps, arff_path, data_set_type, fromzero=False):
     lines.append('@attribute class {{{types}}}'.format(types=','.join(runtime.all_classes)))
 
     # Rahim added this lines
-    fault_injection_minutes = [92, 110, 67, 32, 0, 50, 57, 34, 43, 56]
+    fault_injection_minutes = [92, 110, 67, 32, 55, 50, 57, 34, 43, 56]
 
     lines.append('')
 
