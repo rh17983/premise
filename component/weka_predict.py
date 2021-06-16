@@ -48,7 +48,8 @@ def train(training_dataset_path, model_cache_file_name, evaluation_is_on, summar
     """
     import weka.core.converters as converters
     from weka.classifiers import Classifier
-    from weka.classifiers import Evaluation
+    from weka.classifiers import Classifier
+    from weka.classifiers import BaseClassifier
     from weka.core.classes import Random
 
     global __classifiers
@@ -87,6 +88,7 @@ def train(training_dataset_path, model_cache_file_name, evaluation_is_on, summar
         path = os.path.join('caches/model', model_cache_file_name + '.cache')
         if not os.path.exists(path):
             os.makedirs(path, exist_ok=True)
+        BaseClassifier.save(cls, path)
         cls.save()
 
         localizer_log.msg("Trained model saved")
