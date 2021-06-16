@@ -158,7 +158,7 @@ def predict(exp, arff_path, dst_folder):
             lines = []
             for index, inst in enumerate(data):
                 prediction = cls.classify_instance(inst)
-                print("Predictions file:", f_path, "Prediction:", prediction, "[", int(prediction), "]")
+                print("Predictions file:", f_path, "Prediction:", prediction, "[", int(prediction), "]", runtime.all_classes[int(prediction)])
                 # print("runtime.all_classes:", runtime.all_classes)
                 lines.append(runtime.all_classes[int(prediction)])
             f.writelines('\n'.join(lines))
