@@ -82,7 +82,13 @@ def train(training_dataset_path, model_cache_file_name, evaluation_is_on, summar
         cls.build_classifier(training_data)
         localizer_log.msg("Completed building classifier")
         localizer_log.msg("Saving trained model to {model_cache_name}".format(model_cache_name=model_cache_file_name))
-        localizer_config.save_model(cls, training_data, model_cache_file_name)
+
+        # localizer_config.save_model(cls, training_data, model_cache_file_name)
+        path = os.path.join('caches/model', model_cache_file_name + '.cache')
+        if not os.path.exists(path):
+            os.makedirs(path, exist_ok=True)
+        cls.save()
+
         localizer_log.msg("Trained model saved")
 
         __predictors[classifier_name] = cls
