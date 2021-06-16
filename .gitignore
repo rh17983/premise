@@ -3,7 +3,7 @@
 .ropeproject
 .DS_Store
 .venv
-caches/
+# caches/
 config
 tags
 intermediate/
