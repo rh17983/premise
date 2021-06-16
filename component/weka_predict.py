@@ -6,6 +6,11 @@ from collections import OrderedDict
 import util.localizer_config as localizer_config
 import util.localizer_log as localizer_log
 
+import weka.core.converters as converters
+from weka.classifiers import Classifier
+from weka.classifiers import Evaluation
+from weka.core.classes import Random
+
 
 if os.path.isfile('weka.json'):
     with open('weka.json') as f:
@@ -20,13 +25,16 @@ __classifiers = OrderedDict(__OPTIONS)
 __predictors = {}
 
 
-def load_model(classifier_name):
+def load_model(model_cache_file_name):
     """ Loads the cached classifier model and writes it to the __predictors global variable
-    :param classifier_name: name of the classifier. Example: LMT
+    :param model_cache_file_name: path of the classifier model file
     :return: N/A
     """
     global __predictors
-    __predictors[classifier_name], data = localizer_config.load_model(classifier_name)
+    # __predictors[classifier_name], data = localizer_config.load_model(classifier_name)
+    path = os.path.join('caches', 'model')
+    path = os.path.join(path, model_cache_file_name + '.cache')
+    __predictors["LMT"], _ = Classifier.deserialize(path)
 
 
 def train(training_dataset_path, model_cache_file_name, evaluation_is_on, summary_file_path):
@@ -46,10 +54,6 @@ def train(training_dataset_path, model_cache_file_name, evaluation_is_on, summar
     Returns:
         None
     """
-    import weka.core.converters as converters
-    from weka.classifiers import Classifier
-    from weka.classifiers import Evaluation
-    from weka.core.classes import Random
 
     global __classifiers
     global __predictors

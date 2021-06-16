@@ -84,12 +84,7 @@ def run(mode, model_cache_file_name, evaluation_is_on):
     if mode == "predict":
 
         # Load cached model
-        # weka_predict.load_model(model_cache_file_name)
-        from weka.classifiers import Classifier
-        global __predictors
-        path = os.path.join('caches', 'model')
-        path = os.path.join(path, model_cache_file_name + '.cache')
-        __predictors["LMT"], _ = Classifier.deserialize(path)
+        weka_predict.load_model(model_cache_file_name)
 
         # Predict
         for exp_id, exp in runtime.targets_exps.items():
