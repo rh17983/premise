@@ -48,6 +48,7 @@ def train(training_dataset_path, model_cache_file_name, evaluation_is_on, summar
     """
     import weka.core.converters as converters
     from weka.classifiers import Classifier
+    from weka.classifiers import Evaluation
     from weka.core.classes import Random
 
     global __classifiers
