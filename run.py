@@ -50,6 +50,9 @@ def run(mode, model_cache_file_name, evaluation_is_on):
     if localizer_config.component_enabled('preprocess'):
         preprocess.preprocess()
 
+    # add all classes to the all_classes global variable. Used in @attribute class {..} in training and target arffs.
+    runtime.generate_classes_all()
+
     # Reading training data from anomalies/training-data
     localizer_log.msg("Reading training data: Started.")
     training_dir = localizer_config.get_src_path('training')  # anomalies/training-data

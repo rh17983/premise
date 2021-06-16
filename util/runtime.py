@@ -20,25 +20,22 @@ targets_exps = {}
 all_exps = {}
 all_classes = []
 
-# Rahim
-all_faults = ["MemL@Exp", "MemL@Lin", "MemL@Rnd", "PacL@Lin", "PacL@Exp", "PacL@Rnd", "CpuH@Exp", "CpuH@Lin", "CpuH@Rnd"]
-
 
 # Rahim added this helper function
-def generate_classes_all(all_faults, all_classes):
+def generate_classes_all():
+    global all_classes
+    all_classes = []
+
+    all_faults = ["MemL@Exp", "MemL@Lin", "MemL@Rnd", "PacL@Lin", "PacL@Exp", "PacL@Rnd", "CpuH@Exp", "CpuH@Lin",
+                  "CpuH@Rnd"]
     pairs_number = 10
 
-    the_class = "failurefree_none"
-    if the_class not in all_classes:
-        all_classes.append(the_class)
+    all_classes.append("failurefree_none")
 
     for fault in all_faults:
         for pair_id in range(pairs_number):
             the_class = fault + "_" + str(pair_id)
-            if the_class not in all_classes:
-                all_classes.append(the_class)
-
-    return all_classes
+            all_classes.append(the_class)
 
 
 def add_folder(folder, group):
@@ -99,19 +96,12 @@ def add_all(*args):
         print("From cache.")
     else:
         for folder in args:
-            # print(folder)
-            # input(">>")
             add_folder(folder, all_exps)
         localizer_config.save_cache(all_exps, 'runtime', 'all_exps')
 
-    exptag_name = config.get('exp_tag', 'tag')
-    exptag_klass = localizer_config.get_plugin('exp_tag', exptag_name)
-    all_classes = list(set([exptag_klass.tag(exp) for exp in all_exps.values()]))
-    # Rahim: line added
-    all_classes = generate_classes_all(all_faults, all_classes)
-    # Rahim: line added
-    print("all_classes:", all_classes)
-
+    # exptag_name = config.get('exp_tag', 'tag')
+    # exptag_klass = localizer_config.get_plugin('exp_tag', exptag_name)
+    # all_classes = list(set([exptag_klass.tag(exp) for exp in all_exps.values()]))
 
 
 def add_exp(exp_dir, group):
