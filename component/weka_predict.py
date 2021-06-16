@@ -102,6 +102,7 @@ def train(training_dataset_path, model_cache_file_name, evaluation_is_on, summar
             localizer_log.msg("Start evaluation classifier")
             evl = Evaluation(training_data)
             localizer_log.msg("Complete evaluation classifier")
+
             localizer_log.msg("Start cross-validating classifier")
             evl.crossvalidate_model(cls, training_data, 10, Random(1))
             localizer_log.msg("Complete cross-validating classifier")
