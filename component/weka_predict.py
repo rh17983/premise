@@ -154,13 +154,12 @@ def predict(exp, arff_path, dst_folder):
     data.class_is_last()
     for cls_name, cls in __predictors.items():
         f_path = os.path.join(dst_folder, cls_name + '.txt')
-        print("Predictions file:", f_path)
         with open(f_path, 'w') as f:
             lines = []
             for index, inst in enumerate(data):
                 prediction = cls.classify_instance(inst)
-                print("Prediction:", prediction, "[", int(prediction), "]")
-                print("runtime.all_classes:", runtime.all_classes)
+                print("Predictions file:", f_path, "Prediction:", prediction, "[", int(prediction), "]")
+                # print("runtime.all_classes:", runtime.all_classes)
                 lines.append(runtime.all_classes[int(prediction)])
             f.writelines('\n'.join(lines))
 
