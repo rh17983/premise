@@ -84,7 +84,7 @@ def run(mode, model_cache_file_name, evaluation_is_on):
     if mode == "predict":
 
         # Load cached model
-        localizer_log.msg("Load model", model_cache_file_name)
+        localizer_log.msg("Load model " + model_cache_file_name)
         weka_predict.load_model(model_cache_file_name)
 
         # Predict
