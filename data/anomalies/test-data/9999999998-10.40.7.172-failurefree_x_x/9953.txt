@@ -1,0 +1,6 @@
+('0', 'x', 'redis-14_system.load.5')
+('1', 'x', 'redis-12_system.memory.free')
+('0', 'x', 'redis-14_system.process.summary.running')
+('0', 'x', 'redis-14_system.process.summary.sleeping')
+('4', 'x', 'redis-15_system.socket.summary.tcp.memory')
+('7', 'x', 'redis-17_system.socket.summary.tcp.memory')

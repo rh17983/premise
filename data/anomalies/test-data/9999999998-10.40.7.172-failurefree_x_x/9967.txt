@@ -1,0 +1,5 @@
+('5', 'x', 'redis-20_system.core.irq.pct')
+('5', 'x', 'redis-20_system.core.system.pct')
+('4', 'x', 'redis-15_system.load.15')
+('4', 'x', 'redis-15_system.load.norm.15')
+('7', 'x', 'redis-17_system.process.summary.running')

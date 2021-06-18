@@ -14,7 +14,7 @@ import util.kpi_info as kpi_info
 
 
 # Rahim added these pair_id_list and faults lists
-faults = ["MemL@Exp", "MemL@Lin", "MemL@Rnd", "PacL@Lin", "none", "PacL@Exp", "PacL@Rnd", "CpuH@Exp", "CpuH@Lin", "CpuH@Rnd"]
+faults = ["MemL@Exp", "MemL@Lin", "MemL@Rnd", "PacL@Lin", "PacL@Exp", "none", "PacL@Rnd", "CpuH@Exp", "CpuH@Lin", "CpuH@Rnd"]
 
 
 def gen_file(exps, arff_path, data_set_type, fromzero=False):
@@ -66,8 +66,12 @@ def gen_file(exps, arff_path, data_set_type, fromzero=False):
         # Rahim added this lines
         sets_fault_string = str(tag).split("_")[0]
         if data_set_type == "test":
-            sets_exp_code = int(faults.index(sets_fault_string))
-            fault_injection_minute = fault_injection_minutes[sets_exp_code]
+
+            if sets_fault_string == "failurefree":
+                fault_injection_minute = 999999
+            else:
+                sets_exp_code = int(faults.index(sets_fault_string))
+                fault_injection_minute = fault_injection_minutes[sets_exp_code]
         else:
             fault_injection_minute = 0
 

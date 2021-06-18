@@ -1,0 +1,5 @@
+('5', 'x', 'redis-20_system.core.user.pct')
+('0', 'x', 'redis-14_system.load.5')
+('6', 'x', 'redis-8_system.load.norm.15')
+('8', 'x', 'redis-11_system.process.summary.running')
+('8', 'x', 'redis-11_system.process.summary.sleeping')

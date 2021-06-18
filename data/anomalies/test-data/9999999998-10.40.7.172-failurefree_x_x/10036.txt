@@ -1,0 +1,4 @@
+('0', 'x', 'redis-14_system.cpu.irq.pct')
+('5', 'x', 'redis-20_system.cpu.user.pct')
+('5', 'x', 'redis-20_system.load.5')
+('2', 'x', 'redis-5_system.process.summary.total')

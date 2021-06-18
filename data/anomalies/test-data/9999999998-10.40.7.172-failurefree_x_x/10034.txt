@@ -1,0 +1,5 @@
+('4', 'x', 'redis-15_system.load.norm.15')
+('4', 'x', 'redis-4_system.memory.actual.free')
+('2', 'x', 'redis-5_system.process.summary.total')
+('3', 'x', 'redis-7_system.process.summary.running')
+('3', 'x', 'redis-7_system.process.summary.sleeping')

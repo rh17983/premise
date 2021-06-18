@@ -1,0 +1,8 @@
+('5', 'x', 'redis-9_system.core.softirq.pct')
+('5', 'x', 'redis-20_system.cpu.softirq.pct')
+('5', 'x', 'redis-9_system.cpu.irq.norm.pct')
+('7', 'x', 'redis-17_system.load.norm.15')
+('4', 'x', 'redis-4_system.load.5')
+('4', 'x', 'redis-4_system.load.norm.15')
+('3', 'x', 'redis-7_system.memory.actual.used.pct')
+('4', 'x', 'redis-15_system.process.summary.total')

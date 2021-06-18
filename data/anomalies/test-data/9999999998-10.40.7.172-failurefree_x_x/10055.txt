@@ -1,0 +1,6 @@
+('5', 'x', 'redis-20_system.core.user.pct')
+('5', 'x', 'redis-20_system.cpu.total.pct')
+('4', 'x', 'redis-15_system.process.summary.total')
+('2', 'x', 'redis-5_system.process.summary.total')
+('0', 'x', 'redis-3_system.process.summary.sleeping')
+('7', 'x', 'redis-17_system.socket.summary.tcp.all.established')

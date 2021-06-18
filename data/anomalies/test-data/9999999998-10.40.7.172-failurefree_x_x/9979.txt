@@ -1,0 +1,7 @@
+('8', 'x', 'redis-11_system.memory.actual.used.bytes')
+('8', 'x', 'redis-11_system.memory.free')
+('8', 'x', 'redis-11_system.memory.used.pct')
+('7', 'x', 'redis-6_system.memory.actual.free')
+('7', 'x', 'redis-6_system.memory.actual.used.pct')
+('7', 'x', 'redis-6_system.memory.used.pct')
+('1', 'x', 'redis-1_system.process.summary.total')

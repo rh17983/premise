@@ -1,0 +1,4 @@
+('5', 'x', 'redis-20_system.core.system.pct')
+('2', 'x', 'redis-5_system.cpu.system.norm.pct')
+('2', 'x', 'redis-16_system.memory.actual.free')
+('2', 'x', 'redis-16_system.memory.used.pct')

@@ -1,0 +1,5 @@
+('3', 'x', 'redis-7_system.memory.actual.free')
+('3', 'x', 'redis-7_system.memory.actual.used.bytes')
+('3', 'x', 'redis-7_system.memory.free')
+('1', 'x', 'redis-1_system.process.summary.total')
+('2', 'x', 'redis-16_system.socket.summary.tcp.memory')

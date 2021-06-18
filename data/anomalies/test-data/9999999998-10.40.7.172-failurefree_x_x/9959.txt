@@ -1,0 +1,8 @@
+('5', 'x', 'redis-20_system.cpu.user.norm.pct')
+('3', 'x', 'redis-18_system.load.norm.15')
+('4', 'x', 'redis-4_system.memory.used.bytes')
+('6', 'x', 'redis-8_system.process.summary.running')
+('3', 'x', 'redis-7_system.process.summary.running')
+('3', 'x', 'redis-7_system.process.summary.sleeping')
+('7', 'x', 'redis-6_system.process.summary.running')
+('3', 'x', 'redis-7_system.socket.summary.tcp.memory')

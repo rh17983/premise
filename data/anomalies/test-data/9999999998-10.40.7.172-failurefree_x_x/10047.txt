@@ -1,0 +1,8 @@
+('9', 'x', 'redis-2_system.core.user.pct')
+('8', 'x', 'redis-11_system.cpu.softirq.norm.pct')
+('3', 'x', 'redis-18_system.cpu.total.norm.pct')
+('4', 'x', 'redis-4_system.cpu.irq.pct')
+('1', 'x', 'redis-1_system.fsstat.total_size.free')
+('7', 'x', 'redis-17_system.memory.used.pct')
+('2', 'x', 'redis-16_system.memory.actual.used.pct')
+('7', 'x', 'redis-17_system.process.summary.total')

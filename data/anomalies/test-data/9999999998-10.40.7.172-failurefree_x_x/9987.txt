@@ -1,0 +1,6 @@
+('3', 'x', 'redis-18_system.load.1')
+('7', 'x', 'redis-6_system.memory.actual.free')
+('7', 'x', 'redis-6_system.memory.actual.used.pct')
+('7', 'x', 'redis-6_system.memory.free')
+('7', 'x', 'redis-6_system.memory.used.pct')
+('5', 'x', 'redis-20_system.socket.summary.tcp.all.time_wait')

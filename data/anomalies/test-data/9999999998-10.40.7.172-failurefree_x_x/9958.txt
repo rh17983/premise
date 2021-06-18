@@ -1,0 +1,8 @@
+('5', 'x', 'redis-20_system.cpu.total.norm.pct')
+('4', 'x', 'redis-15_system.load.15')
+('4', 'x', 'redis-15_system.load.norm.15')
+('5', 'x', 'redis-20_system.load.norm.1')
+('7', 'x', 'redis-17_system.process.summary.running')
+('6', 'x', 'redis-8_system.process.summary.running')
+('2', 'x', 'redis-5_system.process.summary.running')
+('7', 'x', 'redis-17_system.socket.summary.tcp.all.established')

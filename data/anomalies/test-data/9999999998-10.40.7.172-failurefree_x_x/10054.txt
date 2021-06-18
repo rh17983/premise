@@ -1,0 +1,3 @@
+('5', 'x', 'redis-20_system.core.user.pct')
+('5', 'x', 'redis-20_system.load.5')
+('4', 'x', 'redis-15_system.process.summary.total')

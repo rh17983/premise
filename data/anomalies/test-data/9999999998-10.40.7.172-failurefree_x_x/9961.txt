@@ -1,0 +1,5 @@
+('5', 'x', 'redis-20_system.core.system.pct')
+('5', 'x', 'redis-20_system.cpu.total.norm.pct')
+('5', 'x', 'redis-20_system.cpu.total.pct')
+('4', 'x', 'redis-15_system.load.norm.15')
+('1', 'x', 'redis-12_system.memory.used.pct')

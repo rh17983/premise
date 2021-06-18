@@ -1,0 +1,8 @@
+('5', 'x', 'redis-20_system.core.system.pct')
+('5', 'x', 'redis-20_system.core.user.pct')
+('2', 'x', 'redis-16_system.cpu.irq.norm.pct')
+('2', 'x', 'redis-16_system.cpu.irq.pct')
+('6', 'x', 'redis-8_system.cpu.irq.norm.pct')
+('5', 'x', 'redis-20_system.cpu.total.norm.pct')
+('4', 'x', 'redis-15_system.process.summary.total')
+('6', 'x', 'redis-8_system.process.summary.running')
