@@ -39,6 +39,7 @@ def run(mode, model_cache_file_name, evaluation_is_on):
     #   3) Folders for each target dataset (the dataset on which classifications to be done) (example: 0000000060-10.40.7.172-PacL@Rnd_0_Rnd):
     #       3.1) Target dataset in arff format. Example: target.arff
     #       3.2) Classification results. Example: LMT.txt
+
     dst_folder = localizer_config.get_folder('dst')
     localizer_config.reset_path(dst_folder)
 
@@ -50,29 +51,23 @@ def run(mode, model_cache_file_name, evaluation_is_on):
     if localizer_config.component_enabled('preprocess'):
         preprocess.preprocess()
 
-    # add all classes to the all_classes global variable. Used in @attribute class {..} in training and target arffs.
+    # Add all classes to the all_classes global variable. Used in @attribute class {..} in training and target arffs.
     runtime.generate_classes_all()
 
-    # Reading training data from anomalies/training-data
-    localizer_log.msg("Reading training data: Started.")
-    training_dir = localizer_config.get_src_path('training')  # anomalies/training-data
-    runtime.add_all(training_dir)
-    localizer_log.msg("Reading training data: Completed.")
-
-    # Reading training data from anomalies/test-data/
-    localizer_log.msg("Reading data for classifications: Started.")
-    target_dir = localizer_config.get_src_path('target')
-    runtime.add_target(target_dir)
-    localizer_log.msg("Reading data for classifications: Completed.")
-
-    if localizer_config.component_enabled('exp_filter'):
-        experiments = exp_filter_manager.filter_(runtime.all_exps)
-        localizer_log.msg("Exp. filter applied.")
-    else:
-        experiments = runtime.all_exps
-        localizer_log.msg("No exp. filter applied.")
-
     if mode == "train":
+
+        # Reading training data from anomalies/training-data
+        localizer_log.msg("Reading training data: Started.")
+        training_dir = localizer_config.get_src_path('training')  # anomalies/training-data
+        runtime.add_all(training_dir)
+        localizer_log.msg("Reading training data: Completed.")
+
+        if localizer_config.component_enabled('exp_filter'):
+            experiments = exp_filter_manager.filter_(runtime.all_exps)
+            localizer_log.msg("Exp. filter applied.")
+        else:
+            experiments = runtime.all_exps
+            localizer_log.msg("No exp. filter applied.")
 
         # Generate training data set in arff format
         localizer_log.msg("Start generating the training.arff file (data for training).")
@@ -85,6 +80,12 @@ def run(mode, model_cache_file_name, evaluation_is_on):
         weka_predict.train(training_dataset_arff_path, model_cache_file_name, evaluation_is_on, path_to_save_training_summary)
 
     if mode == "predict":
+
+        # Reading training data from anomalies/test-data/
+        localizer_log.msg("Reading data for classifications: Started.")
+        target_dir = localizer_config.get_src_path('target')
+        runtime.add_target(target_dir)
+        localizer_log.msg("Reading data for classifications: Completed.")
 
         # Load cached model
         localizer_log.msg("Load model " + model_cache_file_name)
